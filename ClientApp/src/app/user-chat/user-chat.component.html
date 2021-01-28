@@ -1,0 +1,33 @@
+<h1 id="tableLabel">Chat</h1>
+
+<p>This component is a simple chat between users.</p>
+
+<p *ngIf="!messages"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="messages">
+  <thead>
+    <tr>
+      <th width="20%">Date</th>
+      <th width="10%">User</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let msg of messages">
+      <td>{{ msg.created | date:'medium' }}</td>
+      <td><div [ngClass]="{'text-primary' : userName == msg.createdBy }">{{ msg.createdBy }}</div></td>
+      <td>{{ msg.message }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+  <div class="form-group">
+    <label for="name">Message (type "/stock=STOCK_CODE" for stock quote)</label>
+    <input type="text" class="form-control" id="message"
+           placeholder="Enter message" formControlName="message" />
+  </div>
+  <button class="btn btn-primary" type="submit">Submit Form</button>
+
+</form>
+

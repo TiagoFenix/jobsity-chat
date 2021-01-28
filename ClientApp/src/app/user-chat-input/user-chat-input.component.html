@@ -1,0 +1,11 @@
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+  <div class="form-group">
+    <label for="name">Message</label>
+    <input type="text" class="form-control" id="message"
+           placeholder="Enter message" formControlName="message" />
+  </div>
+  <button class="btn btn-primary" type="submit">Submit Form</button>
+
+</form>
+
