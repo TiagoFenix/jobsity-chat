@@ -11,10 +11,12 @@ namespace JobsityChat.Controllers
     public class ChatMessageController : BaseController
     {
         private IChatMessageService _chatMessageService;
+        private readonly IStockBotService _stockBotService;
 
-        public ChatMessageController(IChatMessageService chatMessageService)
+        public ChatMessageController(IChatMessageService chatMessageService, IStockBotService stockBotService)
         {
-            _chatMessageService = chatMessageService;
+            this._chatMessageService = chatMessageService;
+            this._stockBotService = stockBotService;
         }
 
         [HttpGet]
@@ -41,6 +43,13 @@ namespace JobsityChat.Controllers
         public IActionResult Post([FromBody] ChatMessage chatMessage)
         {
             if (chatMessage == null) return BadRequest();
+
+
+            if (chatMessage.Message.StartsWith("/stock="))
+            {
+                return Ok(_stockBotService.CreateStockMessage(chatMessage.Message.Replace("/stock=", "").Trim()));
+            }
+
             //TODO: Not sure why this is getting null value. UI is sending this value meanwhile;
             chatMessage.CreatedBy ??= (this.User.Identity.Name ?? "Anonymous");
             chatMessage.Created = DateTime.Now;

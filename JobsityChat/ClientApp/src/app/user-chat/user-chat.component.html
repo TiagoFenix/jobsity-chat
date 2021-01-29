@@ -15,7 +15,8 @@
   <tbody>
     <tr *ngFor="let msg of messages">
       <td>{{ msg.created | date:'medium' }}</td>
-      <td><div [ngClass]="{'text-primary' : userName == msg.createdBy }">{{ msg.createdBy }}</div></td>
+      <td><div [ngClass]="{'text-primary' : userName == msg.createdBy,
+                           'text-danger'    : msg.createdBy === 'BOT' }">{{ msg.createdBy }}</div></td>
       <td>{{ msg.message }}</td>
     </tr>
   </tbody>

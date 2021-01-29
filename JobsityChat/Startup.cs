@@ -53,6 +53,11 @@ namespace JobsityChat
             //Dependency Injection
             services.AddScoped<IChatMessageService, ChatMessageService>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+            services.AddScoped<IStockBotService, StockBotService>();
+
+            //App settings
+            services.Configure<AppServiceSettings>(Configuration.GetSection("AppServiceSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

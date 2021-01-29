@@ -21,7 +21,7 @@ namespace JobsityChat.Repository
         // nesse momento adicionamos o objeto ao contexto
         // e finalmente salvamos as mudanças no contexto
         // na base de dados
-        public ChatMessage Create(ChatMessage chatMessage)
+        public virtual ChatMessage Create(ChatMessage chatMessage)
         {
             try
             {
